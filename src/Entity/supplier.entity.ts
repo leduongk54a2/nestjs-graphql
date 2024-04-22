@@ -1,23 +1,20 @@
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { Product } from './product.entity';
 
-@Entity({ name: 'category' })
-export class Category {
+@Entity({ name: 'suppliers' })
+export class Supplier {
   @PrimaryColumn({
-    name: 'categoryId',
+    name: 'supplierId',
     type: 'bigint',
     unsigned: true,
   })
-  categoryId: number;
+  supplierId: number;
 
-  @Column({ length: 255, name: 'categoryName' })
-  categoryName: string;
+  @Column({ length: 255, name: 'supplierName' })
+  supplierName: string;
 
   @Column({ length: 255, name: 'textDescription' })
   textDescription: string;
-
-  @Column({ default: true, type: 'tinyint', name: 'visible' })
-  visible: boolean;
 
   @OneToMany(() => Product, (product) => product.category)
   products: Product[];
