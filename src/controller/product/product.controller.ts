@@ -11,7 +11,7 @@ export class ProductController {
   }
 
   @Get('/')
-  findAll(): Promise<Product[]> {
-    return this.service.findAll();
+  products(): Promise<Product[]> {
+    return this.service.products();
   }
 }
