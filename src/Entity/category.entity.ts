@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany, PrimaryColumn } from 'typeorm';
 import { Product } from './product.entity';
 import { Field, ObjectType } from '@nestjs/graphql';
 
@@ -25,7 +25,20 @@ export class Category {
   @Column({ default: true, type: 'tinyint', name: 'visible' })
   visible: boolean;
 
-  @Field(() => [Product])
   @OneToMany(() => Product, (product) => product.category)
+  @JoinColumn({ name: 'categoryId' })
+  @Field(() => [Product])
   products: Product[];
+
+  constructor(
+    categoryId: number,
+    categoryName: string,
+    textDescription: string,
+    visible: boolean,
+  ) {
+    this.categoryId = categoryId;
+    this.categoryName = categoryName;
+    this.textDescription = textDescription;
+    this.visible = visible;
+  }
 }
